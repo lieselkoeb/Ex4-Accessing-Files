@@ -1,5 +1,6 @@
 #ifndef __COUNTWORDS__
 #define __COUNTWORDS__
+#define MAX_WORD_LENGTH 100
 
 // Doubly linked list node that stores a word and its frequency.
 struct wordFrequency {
@@ -29,13 +30,15 @@ void destroyQueue(struct queue *q);
 void destroyWordFrequency(struct wordFrequency * w);
 
 // Adds a word to the queue and set its frequency to 1.
-// Returns 1 on success, or 0 on error.
+// Returns 1 on success.
+// Returns 0 if the word is already in the queue (no changes made).
+// Returns -1 if there is an invalid pointer or another error.
 int addWord(char * string, struct queue * queue);
 
 // Removes a word from the queue and destroys it.
-// Returns 0 if the word is not in the queue.
 // Returns 1 on success.
-// Returns 2 if there is an invalid pointer or another error.
+// Returns 0 if the word is not in the queue.
+// Returns -1 if there is an invalid pointer or another error.
 int removeWord(char * string, struct queue * queue);
 
 // Increases the frequency of a word by 1.
