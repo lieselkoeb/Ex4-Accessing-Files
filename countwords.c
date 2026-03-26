@@ -21,3 +21,47 @@ struct wordFrequency * createWordFrequency() {
 
     return w;
 }
+
+int addWord(char * string, struct queue * queue) {
+    int wiq;
+    struct wordFrequency *w;
+
+    if ((!string) || (!queue)) {
+        return -1;
+    }
+    
+    wiq = wordInQueue(string, queue);
+
+    if (wiq > 0) {
+        return 0; // Word is already in the queue
+    }
+    if (wiq < 0) {
+        return -1; // Invalid pointer or error
+    }
+
+    w = createWordFrequency();
+    if (!w) {
+        return -1;
+    }
+
+    w->frequency = 1;
+    w->word = strdup(string);
+    if (!w->word) {
+        free(w);
+        return -1; 
+    }
+
+    // EMPTY QUEUE
+    if (queue->size == 0) {
+        queue->beg = w;
+    }
+    else {
+        queue->end->next = w;
+        w->prev = queue->end;
+    }
+    
+    queue->end = w;
+    queue->size++;
+
+    return 1;
+}
