@@ -96,6 +96,43 @@ int wordInQueue(char * string, struct queue * queue) {
     return 0;
 }
 
+int increaseWordFrequency(char * string, struct queue * queue) {
+    int wiq, equal;
+    struct wordFrequency *w;
+    char *word;
+
+    if ((!string) || (!queue)) {
+        return -1;
+    }
+    
+    wiq = wordInQueue(string, queue);
+
+    if (wiq == 0) {
+        return 0; // Word is not in the queue
+    }
+    if (wiq < 0) {
+        return -1; // Invalid pointer or error
+    }
+
+    w = queue->beg;
+    if (!w) { // EMPTY QUEUE
+        return 0;
+    }
+
+    while (w) {
+        word = w->word;
+        equal = strcmp(word, string);
+        if (equal == 0) {
+            w->frequency++;
+            return w->frequency;
+        }
+        w = w->next;
+    }
+
+    return 0;
+}
+
+
 void printQueue (struct queue *q) {
     int i;
     struct wordFrequency *w;
