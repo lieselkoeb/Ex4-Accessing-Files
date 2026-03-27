@@ -94,3 +94,23 @@ int wordInQueue(char * string, struct queue * queue) {
 
     return 0;
 }
+
+void printQueue (struct queue *q) {
+    int i;
+    struct wordFrequency *w;
+
+    if (!q) {
+        return;
+    }
+    if (!q->beg) {
+        return;
+    }
+
+    w = q->beg;
+    for (i = 0; i < q->size; i++) {
+        printf("%s, ", w->word);
+        w = w->next;
+    }
+
+    printf("\n");
+}
