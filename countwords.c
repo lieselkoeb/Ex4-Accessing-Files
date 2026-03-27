@@ -3,6 +3,33 @@
 #include <string.h>
 #include "countwords.h"
 
+/* FOWARD DECLARATIONS */
+
+
+/* LOCAL FUNCTIONS */
+
+void printQueue (struct queue *q) {
+    int i;
+    struct wordFrequency *w;
+
+    if (!q) {
+        return;
+    }
+    if (!q->beg) {
+        return;
+    }
+
+    w = q->beg;
+    for (i = 0; i < q->size; i++) {
+        printf("%s, ", w->word);
+        w = w->next;
+    }
+
+    printf("\n");
+}
+
+/* FUNCTIONS */
+
 struct queue * createQueue() {
     struct queue *q;
 
@@ -33,11 +60,8 @@ int addWord(char * string, struct queue * queue) {
     
     wiq = wordInQueue(string, queue);
 
-    if (wiq > 0) {
-        return 0; // Word is already in the queue
-    }
-    if (wiq < 0) {
-        return -1; // Invalid pointer or error
+    if (!wiq) {
+        return 0; // Word is already in the queue, invalid pointer or error
     }
 
     w = createWordFrequency();
@@ -67,13 +91,13 @@ int addWord(char * string, struct queue * queue) {
     return 1;
 }
 
-int wordInQueue(char * string, struct queue * queue) {
+struct wordFrequency * wordInQueue(char * string, struct queue * queue) {
     int i, equal;
     char * word;
     struct wordFrequency * w;
 
     if ((!string) || (!queue)) {
-        return -1;
+        return NULL;
     }
     
     w = queue->beg;
@@ -84,7 +108,7 @@ int wordInQueue(char * string, struct queue * queue) {
     for (i = 0; i < queue->size; i++) {
         equal = strcmp(word, string);
         if (equal == 0) {
-            return w->frequency;
+            return w;
         }
         w = w->next;
         if (w != NULL) {
@@ -92,5 +116,5 @@ int wordInQueue(char * string, struct queue * queue) {
         }
     }
 
-    return 0;
+    return NULL;
 }
