@@ -59,6 +59,9 @@ int decreaseWordFrequency(char * string, struct queue * queue);
 // Returns -1 if there is an invalid pointer or another error.
 int wordInQueue(char * string, struct queue * queue);
 
+// Prints most frequent word and its frequency
+void printMostFrequentWord(struct queue *q);
+
 // Prints the queue
 void printQueue (struct queue *q);
 #endif

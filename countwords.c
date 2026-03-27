@@ -132,6 +132,29 @@ int increaseWordFrequency(char * string, struct queue * queue) {
     return 0;
 }
 
+void printMostFrequentWord(struct queue *q) {
+    struct wordFrequency *w, *max;
+
+    if (!q) {
+        return;
+    }
+    if (!q->beg) {
+        return;
+    }
+
+    max = q->beg;
+    w = max->next;
+
+    while (w) {
+        if (w->frequency > max->frequency) {
+            max = w;
+        }
+        w = w->next;
+    }
+    
+    printf("%s: %d\n", max->word, max->frequency);
+
+}
 
 void printQueue (struct queue *q) {
     int i;
