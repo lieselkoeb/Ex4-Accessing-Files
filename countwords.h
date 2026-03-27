@@ -31,8 +31,7 @@ void destroyWordFrequency(struct wordFrequency * w);
 
 // Adds a word to the queue and set its frequency to 1.
 // Returns 1 on success.
-// Returns 0 if the word is already in the queue (no changes made).
-// Returns -1 if there is an invalid pointer or another error.
+// Returns 0 if the word is already in the queue (no changes made), if there is an invalid pointer or another error.
 int addWord(char * string, struct queue * queue);
 
 // Removes a word from the queue and destroys it.
@@ -54,10 +53,11 @@ int increaseWordFrequency(char * string, struct queue * queue);
 // Returns -1 if there is an invalid pointer or another error.
 int decreaseWordFrequency(char * string, struct queue * queue);
 
-// Returns the frequency of a word in the queue.
-// Returns 0 if the word is not in the queue.
-// Returns -1 if there is an invalid pointer or another error.
-int wordInQueue(char * string, struct queue * queue);
+// Returns the pointer of a word in the queue.
+// Returns NULL if the word is not in the queue, if there is an invalid pointer or another error.
+struct wordFrequency * wordInQueue(char * string, struct queue * queue);
 
+// Prints the queue
+void printQueue (struct queue *q);
 
 #endif
