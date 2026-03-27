@@ -108,7 +108,7 @@ void printQueue (struct queue *q) {
 
     w = q->beg;
     for (i = 0; i < q->size; i++) {
-        printf("%s, ", w->word);
+        printf("%s: %d, ", w->word, w->frequency);
         w = w->next;
     }
 
