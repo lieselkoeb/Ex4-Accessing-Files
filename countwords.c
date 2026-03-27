@@ -77,10 +77,11 @@ int wordInQueue(char * string, struct queue * queue) {
     }
     
     w = queue->beg;
-    if (w != NULL) {
-        word = w->word;
+    if (!w) { // EMPTY QUEUE
+        return 0;
     }
     
+    word = w->word;
     for (i = 0; i < queue->size; i++) {
         equal = strcmp(word, string);
         if (equal == 0) {
