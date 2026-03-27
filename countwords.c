@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "countwords.h"
 
 struct queue * createQueue() {
@@ -64,4 +65,32 @@ int addWord(char * string, struct queue * queue) {
     queue->size++;
 
     return 1;
+}
+
+int wordInQueue(char * string, struct queue * queue) {
+    int i, equal;
+    char * word;
+    struct wordFrequency * w;
+
+    if ((!string) || (!queue)) {
+        return -1;
+    }
+    
+    w = queue->beg;
+    if (w != NULL) {
+        word = w->word;
+    }
+    
+    for (i = 0; i < queue->size; i++) {
+        equal = strcmp(word, string);
+        if (equal == 0) {
+            return w->frequency;
+        }
+        w = w->next;
+        if (w != NULL) {
+            word = w->word;
+        }
+    }
+
+    return 0;
 }
